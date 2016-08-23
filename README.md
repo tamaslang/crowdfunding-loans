@@ -9,3 +9,9 @@ This solution assumes (but the correct business behaviour would have been clarif
 
 Acceptance tests are written in Groovy with Spock:
 https://github.com/tamaslang/crowdfunding-loans/blob/master/src/test/groovy/CrowdFundingPlatformAcceptanceSpec.groovy
+
+
+Build with mvn:
+```
+mvn compile test
+```
