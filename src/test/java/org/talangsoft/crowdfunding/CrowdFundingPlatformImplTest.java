@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 
-public class CrowdFundingApiImplTest {
+public class CrowdFundingPlatformImplTest {
 
     private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl();
     @Test

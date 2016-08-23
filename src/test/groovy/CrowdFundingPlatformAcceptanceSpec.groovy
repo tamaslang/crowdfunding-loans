@@ -5,7 +5,7 @@ import org.talangsoft.crowdfunding.CrowdFundingPlatformImpl
 import spock.lang.Unroll
 
 @Unroll
-class CrowdFundingApiAcceptanceSpec extends spock.lang.Specification {
+class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
 
     def "Amount '#amount' for '#days' with offers #offers should result in amount '#epectedAmount' with rate '#expectedInterestRate'"() {
 
