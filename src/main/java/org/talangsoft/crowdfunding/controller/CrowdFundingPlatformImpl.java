@@ -1,10 +1,11 @@
-package org.talangsoft.crowdfunding.api;
+package org.talangsoft.crowdfunding.controller;
 
 import com.google.common.base.Preconditions;
+import org.talangsoft.crowdfunding.model.CurrentOfferResult;
 import org.talangsoft.crowdfunding.model.LoanOffer;
 import org.talangsoft.crowdfunding.model.LoanRequest;
-import org.talangsoft.crowdfunding.model.RequestAndOffers;
 import org.talangsoft.crowdfunding.repository.RequestAndOffersRepository;
+import org.talangsoft.crowdfunding.service.LendingCalculationStrategy;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -13,8 +14,11 @@ public class CrowdFundingPlatformImpl implements CrowdFundingPlatform {
 
     private RequestAndOffersRepository repository;
 
-    public CrowdFundingPlatformImpl(RequestAndOffersRepository repository) {
+    private LendingCalculationStrategy calculationStrategy;
+
+    public CrowdFundingPlatformImpl(RequestAndOffersRepository repository, LendingCalculationStrategy calculationStrategy) {
         this.repository = repository;
+        this.calculationStrategy = calculationStrategy;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class CrowdFundingPlatformImpl implements CrowdFundingPlatform {
 
     @Override
     public CurrentOfferResult getCurrentOffer(UUID loanRequestId) {
-        return calculateCurrentOffer(repository.findByLoanRequestId(loanRequestId));
+        return calculationStrategy.calculateCurrentOffer(repository.findByLoanRequestId(loanRequestId));
     }
 
 }

@@ -1,11 +1,12 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.platform;
 
 import org.junit.Test;
 import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository;
 import org.talangsoft.crowdfunding.repository.UnknownLoanRequestIdEx;
-import org.talangsoft.crowdfunding.api.CrowdFundingPlatform;
-import org.talangsoft.crowdfunding.api.CrowdFundingPlatformImpl;
-import org.talangsoft.crowdfunding.api.CurrentOfferResult;
+import org.talangsoft.crowdfunding.controller.CrowdFundingPlatform;
+import org.talangsoft.crowdfunding.controller.CrowdFundingPlatformImpl;
+import org.talangsoft.crowdfunding.model.CurrentOfferResult;
+import org.talangsoft.crowdfunding.service.LendingCalculationLowestRateFirstStrategy;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -17,7 +18,9 @@ import static org.junit.Assert.assertThat;
 
 public class CrowdFundingPlatformImplTest {
 
-    private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl(new InMemoryRequestAndOffersRepository());
+    private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl(
+            new InMemoryRequestAndOffersRepository(),
+            new LendingCalculationLowestRateFirstStrategy());
 
     @Test
     public void createLoanRequestFor100DaysShouldReturnUniqueIdentifier() {

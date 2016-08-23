@@ -1,6 +1,7 @@
-import org.talangsoft.crowdfunding.api.CrowdFundingPlatformImpl
-import org.talangsoft.crowdfunding.api.CurrentOfferResult
+import org.talangsoft.crowdfunding.controller.CrowdFundingPlatformImpl
+import org.talangsoft.crowdfunding.model.CurrentOfferResult
 import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository
+import org.talangsoft.crowdfunding.service.LendingCalculationLowestRateFirstStrategy
 import spock.lang.Unroll
 
 @Unroll
@@ -8,7 +9,9 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
 
     def "Amount '#amount' for '#days' with offers #offers should result in amount '#expectedAmount' with rate '#expectedInterestRate'"() {
 
-        def crowdFundingPlatform = new CrowdFundingPlatformImpl(new InMemoryRequestAndOffersRepository())
+        def crowdFundingPlatform = new CrowdFundingPlatformImpl(
+                new InMemoryRequestAndOffersRepository(),
+                new LendingCalculationLowestRateFirstStrategy())
 
         given: "The loan for '#amount' for '#days' is requested"
         def loanRequestId = crowdFundingPlatform.createLoanRequest(BigDecimal.valueOf(amount), days)

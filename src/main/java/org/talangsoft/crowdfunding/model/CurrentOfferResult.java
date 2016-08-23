@@ -1,4 +1,4 @@
-package org.talangsoft.crowdfunding.api;
+package org.talangsoft.crowdfunding.model;
 
 import java.math.BigDecimal;
 

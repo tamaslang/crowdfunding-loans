@@ -1,19 +1,14 @@
-package org.talangsoft.crowdfunding.api;
+package org.talangsoft.crowdfunding.service;
 
+import org.talangsoft.crowdfunding.model.CurrentOfferResult;
 import org.talangsoft.crowdfunding.model.LoanOffer;
 import org.talangsoft.crowdfunding.model.RequestAndOffers;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
-public interface CrowdFundingPlatform {
-    UUID createLoanRequest(BigDecimal amount, Integer days);
-
-    UUID createLoanOffer(UUID loanRequestIdentifier, BigDecimal amount, BigDecimal interestRate);
-
-    CurrentOfferResult getCurrentOffer(UUID loanRequestId);
-
-    default CurrentOfferResult calculateCurrentOffer(RequestAndOffers requestAndOffers) {
+public class LendingCalculationLowestRateFirstStrategy implements LendingCalculationStrategy {
+    @Override
+    public CurrentOfferResult calculateCurrentOffer(RequestAndOffers requestAndOffers) {
         if (requestAndOffers.getOffers().isEmpty()) {
             return new CurrentOfferResult(BigDecimal.ZERO, BigDecimal.ZERO);
         }

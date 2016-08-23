@@ -1,21 +1,19 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.service;
 
 import org.junit.Test;
-import org.talangsoft.crowdfunding.api.CrowdFundingPlatform;
-import org.talangsoft.crowdfunding.api.CrowdFundingPlatformImpl;
-import org.talangsoft.crowdfunding.api.CurrentOfferResult;
+import org.talangsoft.crowdfunding.controller.CrowdFundingPlatform;
+import org.talangsoft.crowdfunding.model.CurrentOfferResult;
 import org.talangsoft.crowdfunding.model.LoanOffer;
 import org.talangsoft.crowdfunding.model.LoanRequest;
 import org.talangsoft.crowdfunding.model.RequestAndOffers;
-import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-public class CrowdFundingLendingLogicTest {
+public class LendingCalculationLowestRateFirstStrategyTest {
 
-    private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl(new InMemoryRequestAndOffersRepository());
+    private LendingCalculationStrategy underTest = new LendingCalculationLowestRateFirstStrategy();
 
     @Test
     public void requestWithNoOffersShouldReturnCurrentOfferWithZeros() {
