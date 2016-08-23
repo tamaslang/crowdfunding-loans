@@ -18,7 +18,6 @@
     </properties>
 
     <dependencies>
-
         <!--Utils dependencies -->
         <dependency>
             <groupId>com.google.guava</groupId>

@@ -1,7 +1,6 @@
 package org.talangsoft.crowdfunding;
 
 import org.junit.Test;
-import org.talangsoft.crowdfunding.CrowdFundingApi;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
