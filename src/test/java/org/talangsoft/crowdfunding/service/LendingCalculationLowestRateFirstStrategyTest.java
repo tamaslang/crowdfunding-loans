@@ -45,10 +45,11 @@ public class LendingCalculationLowestRateFirstStrategyTest {
     }
 
     @Test
-    public void request1000With2OffersShouldReturnLowerOffer() {
+    public void request1000With3OffersShouldReturnLowerOffer() {
         RequestAndOffers rno = new RequestAndOffers(new LoanRequest(BigDecimal.valueOf(1000), 100));
         rno.createOffer(new LoanOffer(BigDecimal.valueOf(1000), BigDecimal.valueOf(20.0)));
         rno.createOffer(new LoanOffer(BigDecimal.valueOf(1000), BigDecimal.valueOf(10.0)));
+        rno.createOffer(new LoanOffer(BigDecimal.valueOf(1000), BigDecimal.valueOf(15.0)));
         assertEquals(new CurrentOfferResult(BigDecimal.valueOf(1000), BigDecimal.valueOf(10.0)), underTest.calculateCurrentOffer(rno));
     }
 
