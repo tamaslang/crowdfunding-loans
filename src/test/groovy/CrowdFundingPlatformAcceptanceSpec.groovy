@@ -15,7 +15,7 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
 
         given: "The loan for '#amount' for '#days' is requested"
         def loanRequestId = crowdFundingPlatform.createLoanRequest(BigDecimal.valueOf(amount), days)
-        and: "The lenders for #loanRequestId are offered"
+        and: "The lenders for #loanRequestId are offered #offers"
         offers.each {
             crowdFundingPlatform.createLoanOffer(loanRequestId, BigDecimal.valueOf(it.amount), BigDecimal.valueOf(it.interestRate))
         }
