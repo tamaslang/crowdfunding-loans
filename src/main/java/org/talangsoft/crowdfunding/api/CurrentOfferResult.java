@@ -1,12 +1,12 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.api;
 
 import java.math.BigDecimal;
 
-public class CurrentOffer {
+public class CurrentOfferResult {
     private BigDecimal amount;
     private BigDecimal interestRate;
 
-    public CurrentOffer(BigDecimal amount, BigDecimal interestRate) {
+    public CurrentOfferResult(BigDecimal amount, BigDecimal interestRate) {
         this.amount = amount;
         this.interestRate = interestRate;
     }
@@ -16,7 +16,7 @@ public class CurrentOffer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CurrentOffer that = (CurrentOffer) o;
+        CurrentOfferResult that = (CurrentOfferResult) o;
 
         if (!amount.equals(that.amount)) return false;
         return interestRate.equals(that.interestRate);

@@ -3,7 +3,7 @@ Coding Test
 
 This solution assumes:
 - Lenders can not make offer with 0% interest rate
-
+- Currency is not relevant (Otherwise a type like Joda Money would be useful)
 
 For the sake of a simple solution I assume the duration will be no more granular than days
 (Otherwise I might consider using a type like java.time.Duration to represent the duration)

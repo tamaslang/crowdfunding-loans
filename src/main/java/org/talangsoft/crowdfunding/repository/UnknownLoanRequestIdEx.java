@@ -1,4 +1,4 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.repository;
 
 public class UnknownLoanRequestIdEx extends RuntimeException {
 

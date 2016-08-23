@@ -1,4 +1,4 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.model;
 
 import java.math.BigDecimal;
 import java.util.UUID;

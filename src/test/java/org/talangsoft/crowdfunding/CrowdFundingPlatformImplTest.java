@@ -1,6 +1,11 @@
 package org.talangsoft.crowdfunding;
 
 import org.junit.Test;
+import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository;
+import org.talangsoft.crowdfunding.repository.UnknownLoanRequestIdEx;
+import org.talangsoft.crowdfunding.api.CrowdFundingPlatform;
+import org.talangsoft.crowdfunding.api.CrowdFundingPlatformImpl;
+import org.talangsoft.crowdfunding.api.CurrentOfferResult;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -12,7 +17,7 @@ import static org.junit.Assert.assertThat;
 
 public class CrowdFundingPlatformImplTest {
 
-    private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl();
+    private CrowdFundingPlatform underTest = new CrowdFundingPlatformImpl(new InMemoryRequestAndOffersRepository());
 
     @Test
     public void createLoanRequestFor100DaysShouldReturnUniqueIdentifier() {
@@ -73,7 +78,7 @@ public class CrowdFundingPlatformImplTest {
     @Test
     public void getCurrentOfferForExistingRequestWithoutOffersShouldReturnOfferWithZeros() {
         UUID loanRequestId = underTest.createLoanRequest(BigDecimal.valueOf(100), 100);
-        assertThat(underTest.getCurrentOffer(loanRequestId), equalTo(new CurrentOffer(BigDecimal.ZERO, BigDecimal.ZERO)));
+        assertThat(underTest.getCurrentOffer(loanRequestId), equalTo(new CurrentOfferResult(BigDecimal.ZERO, BigDecimal.ZERO)));
     }
 
 }

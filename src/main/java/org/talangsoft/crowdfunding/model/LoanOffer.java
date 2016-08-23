@@ -1,9 +1,9 @@
-package org.talangsoft.crowdfunding;
+package org.talangsoft.crowdfunding.model;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class LoanOffer {
+public class LoanOffer implements Comparable<LoanOffer> {
     private UUID identifier;
     private BigDecimal amount;
     private BigDecimal interestRate;
@@ -24,5 +24,10 @@ public class LoanOffer {
 
     public BigDecimal getInterestRate() {
         return interestRate;
+    }
+
+    @Override
+    public int compareTo(LoanOffer other) {
+        return this.interestRate.compareTo(other.interestRate);
     }
 }

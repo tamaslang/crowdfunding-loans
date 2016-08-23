@@ -1,5 +1,6 @@
-import org.talangsoft.crowdfunding.CrowdFundingPlatformImpl
-import org.talangsoft.crowdfunding.CurrentOffer
+import org.talangsoft.crowdfunding.api.CrowdFundingPlatformImpl
+import org.talangsoft.crowdfunding.api.CurrentOfferResult
+import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository
 import spock.lang.Unroll
 
 @Unroll
@@ -7,7 +8,7 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
 
     def "Amount '#amount' for '#days' with offers #offers should result in amount '#expectedAmount' with rate '#expectedInterestRate'"() {
 
-        def crowdFundingPlatform = new CrowdFundingPlatformImpl()
+        def crowdFundingPlatform = new CrowdFundingPlatformImpl(new InMemoryRequestAndOffersRepository())
 
         given: "The loan for '#amount' for '#days' is requested"
         def loanRequestId = crowdFundingPlatform.createLoanRequest(BigDecimal.valueOf(amount), days)
@@ -17,7 +18,7 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
         }
 
         expect: "Current offer with amount '#expectedAmount' with rate '#expectedInterest'"
-        crowdFundingPlatform.getCurrentOffer(loanRequestId) == new CurrentOffer(BigDecimal.valueOf(expectedAmount), BigDecimal.valueOf(expectedInterestRate))
+        crowdFundingPlatform.getCurrentOffer(loanRequestId) == new CurrentOfferResult(BigDecimal.valueOf(expectedAmount), BigDecimal.valueOf(expectedInterestRate))
 
         where:
         amount | days | offers                                                                                       | expectedAmount | expectedInterestRate
