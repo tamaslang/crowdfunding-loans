@@ -28,7 +28,6 @@ public class LendingCalculationLowestRateFirstStrategyTest {
         assertEquals(new CurrentOfferResult(BigDecimal.valueOf(50), BigDecimal.valueOf(10.0)), underTest.calculateCurrentOffer(rno));
     }
 
-
     @Test
     public void request100WithTwoOfferBelowTheAmountShouldReturnBothOffersAndAverageInterestRate() {
         RequestAndOffers rno = new RequestAndOffers(new LoanRequest(BigDecimal.valueOf(100), 100));
@@ -50,6 +49,14 @@ public class LendingCalculationLowestRateFirstStrategyTest {
         RequestAndOffers rno = new RequestAndOffers(new LoanRequest(BigDecimal.valueOf(1000), 100));
         rno.createOffer(new LoanOffer(BigDecimal.valueOf(1000), BigDecimal.valueOf(20.0)));
         rno.createOffer(new LoanOffer(BigDecimal.valueOf(1000), BigDecimal.valueOf(10.0)));
+        assertEquals(new CurrentOfferResult(BigDecimal.valueOf(1000), BigDecimal.valueOf(10.0)), underTest.calculateCurrentOffer(rno));
+    }
+
+    @Test
+    public void request1000With2BiggerOffersShouldReturnFractionOfLowerOffer() {
+        RequestAndOffers rno = new RequestAndOffers(new LoanRequest(BigDecimal.valueOf(1000), 100));
+        rno.createOffer(new LoanOffer(BigDecimal.valueOf(4000), BigDecimal.valueOf(20.0)));
+        rno.createOffer(new LoanOffer(BigDecimal.valueOf(5000), BigDecimal.valueOf(10.0)));
         assertEquals(new CurrentOfferResult(BigDecimal.valueOf(1000), BigDecimal.valueOf(10.0)), underTest.calculateCurrentOffer(rno));
     }
 }

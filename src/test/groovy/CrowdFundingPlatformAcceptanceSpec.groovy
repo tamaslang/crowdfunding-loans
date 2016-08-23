@@ -27,6 +27,8 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
         amount | days | offers                                                                                       | expectedAmount | expectedInterestRate
         1000.0 | 100  | [new Offer(100.0, 5.0), new Offer(500.0, 8.6)]                                               | 600.0          | 8.0
         1000.0 | 100  | [new Offer(100.0, 5.0), new Offer(600.0, 6.0), new Offer(600.0, 7.0), new Offer(500.0, 8.2)] | 1000.0         | 6.2
+        1000.0 | 100  | [new Offer(500.0, 5.0), new Offer(500.0, 7.0)]                                               | 1000.0         | 6.0
+        1000.0 | 100  | [new Offer(2000.0, 5.0), new Offer(4000.0, 4.0)]                                             | 1000.0         | 4.0
     }
 
     static class Offer {
