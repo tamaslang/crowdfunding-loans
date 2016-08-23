@@ -6,3 +6,6 @@ This solution assumes (but the correct business behaviour would have been clarif
 - Currency is not relevant (Otherwise a type like Joda Money would be useful)
 - The duration of the loan request will be no more granular than days (Otherwise I might consider using a type like java.time.Duration to represent the duration)
 - For a simple solution,  all id's are randomly generated UUID
+
+Acceptance tests are written in Groovy with Spock:
+https://github.com/tamaslang/crowdfunding-loans/blob/master/src/test/groovy/CrowdFundingPlatformAcceptanceSpec.groovy
