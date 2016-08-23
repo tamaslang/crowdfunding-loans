@@ -1,14 +1,12 @@
 package org.talangsoft.crowdfunding;
 
-import org.joda.money.Money;
-
 import java.math.BigDecimal;
 
-public class CombinedOffer {
-    private Money amount;
+public class CurrentOffer {
+    private BigDecimal amount;
     private BigDecimal interestRate;
 
-    public CombinedOffer(Money amount, BigDecimal interestRate) {
+    public CurrentOffer(BigDecimal amount, BigDecimal interestRate) {
         this.amount = amount;
         this.interestRate = interestRate;
     }
@@ -18,7 +16,7 @@ public class CombinedOffer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CombinedOffer that = (CombinedOffer) o;
+        CurrentOffer that = (CurrentOffer) o;
 
         if (!amount.equals(that.amount)) return false;
         return interestRate.equals(that.interestRate);
@@ -30,5 +28,13 @@ public class CombinedOffer {
         int result = amount.hashCode();
         result = 31 * result + interestRate.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentOffer{" +
+                "amount=" + amount +
+                ", interestRate=" + interestRate +
+                '}';
     }
 }

@@ -20,17 +20,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.joda</groupId>
-            <artifactId>joda-money</artifactId>
-            <version>${joda-money.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
-
         <!--Utils dependencies -->
         <dependency>
             <groupId>com.google.guava</groupId>
