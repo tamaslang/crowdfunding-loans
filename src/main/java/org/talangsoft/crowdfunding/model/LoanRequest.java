@@ -6,10 +6,6 @@ import java.util.UUID;
 public class LoanRequest {
     private UUID identifier;
     private BigDecimal amount;
-    /*
-     * For a simple solution, I assume the duration will be no more granular than days
-     * Alternatively I would use java.time.Duration class
-     */
     private int durationInDays;
 
     public LoanRequest(BigDecimal amount, int durationInDays) {
