@@ -43,7 +43,7 @@ public class CrowdFundingPlatformImpl implements CrowdFundingPlatform {
         return calculateCurrentOffer(loanRequestId);
     }
 
-    protected CurrentOfferResult calculateCurrentOffer(UUID loanRequestId) {
+    private CurrentOfferResult calculateCurrentOffer(UUID loanRequestId) {
         RequestAndOffers requestAndOffers = repository.findByLoanRequestId(loanRequestId);
         if (requestAndOffers.getOffers().isEmpty()) {
             return NO_OFFER;
