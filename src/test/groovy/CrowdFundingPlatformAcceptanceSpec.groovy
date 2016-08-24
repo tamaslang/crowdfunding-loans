@@ -1,7 +1,6 @@
 import org.talangsoft.crowdfunding.controller.CrowdFundingPlatformImpl
 import org.talangsoft.crowdfunding.model.CurrentOfferResult
 import org.talangsoft.crowdfunding.repository.InMemoryRequestAndOffersRepository
-import org.talangsoft.crowdfunding.service.LendingCalculationLowestRateFirstStrategy
 import spock.lang.Unroll
 
 @Unroll
@@ -10,34 +9,33 @@ class CrowdFundingPlatformAcceptanceSpec extends spock.lang.Specification {
     def "Amount '#amount' for '#days' with offers #offers should result in amount '#expectedAmount' with rate '#expectedInterestRate'"() {
 
         def crowdFundingPlatform = new CrowdFundingPlatformImpl(
-                new InMemoryRequestAndOffersRepository(),
-                new LendingCalculationLowestRateFirstStrategy())
+                new InMemoryRequestAndOffersRepository())
 
         given: "The loan for '#amount' for '#days' is requested"
-        def loanRequestId = crowdFundingPlatform.createLoanRequest(BigDecimal.valueOf(amount), days)
+        def loanRequestId = crowdFundingPlatform.createLoanRequest(new BigDecimal(amount), days)
         and: "The lenders for #loanRequestId are offered #offers"
         offers.each {
-            crowdFundingPlatform.createLoanOffer(loanRequestId, BigDecimal.valueOf(it.amount), BigDecimal.valueOf(it.interestRate))
+            crowdFundingPlatform.createLoanOffer(loanRequestId, it.amount, it.interestRate)
         }
 
         expect: "Current offer with amount '#expectedAmount' with rate '#expectedInterest'"
-        crowdFundingPlatform.getCurrentOffer(loanRequestId) == new CurrentOfferResult(BigDecimal.valueOf(expectedAmount), BigDecimal.valueOf(expectedInterestRate))
+        crowdFundingPlatform.getCurrentOffer(loanRequestId) == new CurrentOfferResult(new BigDecimal(expectedAmount), new BigDecimal(expectedInterestRate))
 
         where:
-        amount | days | offers                                                                                       | expectedAmount | expectedInterestRate
-        1000.0 | 100  | [new Offer(100.0, 5.0), new Offer(500.0, 8.6)]                                               | 600.0          | 8.0
-        1000.0 | 100  | [new Offer(100.0, 5.0), new Offer(600.0, 6.0), new Offer(600.0, 7.0), new Offer(500.0, 8.2)] | 1000.0         | 6.2
-        1000.0 | 100  | [new Offer(500.0, 5.0), new Offer(500.0, 7.0)]                                               | 1000.0         | 6.0
-        1000.0 | 100  | [new Offer(2000.0, 5.0), new Offer(4000.0, 4.0)]                                             | 1000.0         | 4.0
+        amount | days | offers                                                                                         | expectedAmount | expectedInterestRate
+        1000.0 | 100  | [new Offer("100", "5"), new Offer("500", "8")]                                                 | "600"          | "7.5"
+        1000.0 | 100  | [new Offer("100", "5"), new Offer("600", "6"), new Offer("600", "7"), new Offer("500", "8.2")] | "1000"         | "6.2"
+        1000.0 | 100  | [new Offer("500", "5"), new Offer("500", "7")]                                                 | "1000"         | "6"
+        1000.0 | 100  | [new Offer("2000", "5"), new Offer("4000", "4")]                                               | "1000"         | "4"
     }
 
     static class Offer {
-        double amount
-        double interestRate
+        BigDecimal amount
+        BigDecimal interestRate
 
-        Offer(double amount, double interestRate) {
-            this.amount = amount
-            this.interestRate = interestRate
+        Offer(String amount, String interestRate) {
+            this.amount = new BigDecimal(amount)
+            this.interestRate = new BigDecimal(interestRate)
         }
 
         @Override

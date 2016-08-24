@@ -5,7 +5,7 @@ import java.util.*;
 public class RequestAndOffers {
     private LoanRequest request;
 
-    private Set<LoanOffer> offers = new TreeSet<>();
+    private List<LoanOffer> offers = new ArrayList<>();
 
     public RequestAndOffers(LoanRequest request) {
         this.request = request;
@@ -19,7 +19,7 @@ public class RequestAndOffers {
         return request;
     }
 
-    public Set<LoanOffer> getOffers() {
+    public List<LoanOffer> getOffers() {
         return offers;
     }
 }
