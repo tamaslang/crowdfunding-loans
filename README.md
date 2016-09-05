@@ -1,5 +1,6 @@
 # crowdfunding-loans
-Coding Test, See desccription: https://github.com/tamaslang/crowdfunding-loans/blob/master/docs/Crowdfunding%20Loans.pdf
+Coding Test
+See desccription: https://github.com/tamaslang/crowdfunding-loans/blob/master/docs/Crowdfunding%20Loans.pdf
 
 This solution assumes:
 - Lenders can not make offer with 0% interest rate
